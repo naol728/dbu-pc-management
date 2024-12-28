@@ -1,0 +1,25 @@
+{
+  "information": [
+    {
+      "id": "1402037",
+      "name": "Naol Meseret",
+      "department": "Software Engineering",
+      "status": "student",
+      "phone": "097890867",
+      "block": 37,
+      "Brand": "Dell",
+      "Serialno": 123456,
+      "color": "black"
+    },
+    {
+      "id": "dbu1402037",
+      "name": "Naol Meseret",
+      "department": "software enginering",
+      "phone": "251907203507",
+      "block": "37",
+      "Brand": "Lenovo",
+      "Serialno": "Rjsonus",
+      "color": "black"
+    }
+  ]
+}
