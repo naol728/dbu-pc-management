@@ -1,3 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Primary (Background): #282828 (Dark Gray)
+Secondary (Text): #FFD700 (Gold)
+Accent (Buttons/Highlights): #FF4500 (Bright Red-Orange) */
