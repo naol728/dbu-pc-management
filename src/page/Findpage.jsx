@@ -1,35 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function Findpage() {
   const navigate = useNavigate();
   const [find, setFind] = useState("");
-  const data = [
-    {
-      id: 1402037,
-      name: "Naol Meseret",
-      department: "Software Engineering",
-      status: "student",
-      phone: "097890867",
-      block: 37,
-      Brand: "Dell",
-      Serialno: 123456,
-      color: "black",
-    },
-  ];
+  const [apidata, setApidata] = useState([]);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchdata() {
+      const res = await fetch("http://localhost:8000/information");
+      const data = await res.json();
+      setApidata(data);
+    }
+    fetchdata();
+  }, []);
 
   function handlefind(e) {
-    e.preventDefault();
     setFind(e.target.value);
   }
+
   function handlesubmit(e) {
     e.preventDefault();
+    const founddata = apidata.find((item) => item.id == find);
+    console.log("this is from the found page");
+    if (founddata) {
+      setData(founddata);
+    } else {
+      setData(null);
+      alert("no data found");
+    }
   }
   function handleback() {
     navigate("/");
   }
-
   return (
     <div className="flex flex-col items-center  h-[85vh]">
       <button
@@ -52,50 +57,48 @@ export default function Findpage() {
       </div>
 
       <div className=" mt-16 w-3/4 font-mono">
-        {data.length > 0 ? (
-          data.map((item) => (
-            <ul className="bg-gray-200  rounded-2xl w-full shadow-xl p-10">
-              <li className="text-center font-mono font-bold text-2xl underline mb-3">
-                Information
-              </li>
-              <li className="flex justify-between  text-2xl">
-                <span className="font-bold"> {"Id number:"}</span>
-                {item.id}
-              </li>
-              <li className="flex justify-between  text-2xl">
-                <span className="font-bold"> {"Name:"}</span>
-                {item.name}
-              </li>
-              <li className="flex justify-between  text-2xl">
-                <span className="font-bold">{"department:"}</span>
-                {item.department}
-              </li>
-              <li className="flex justify-between  text-2xl">
-                <span className="font-bold">{"status:"}</span>
-                {item.status}
-              </li>
-              <li className="flex justify-between  text-2xl">
-                <span className="font-bold">{"Phone number:"}</span>
-                {item.phone}
-              </li>
-              <li className="flex justify-between  text-2xl">
-                <span className="font-bold"> {"Block:"}</span>
-                {item.block}
-              </li>
-              <li className="flex justify-between  text-2xl">
-                <span className="font-bold">{"Pc Brand:"}</span>
-                {item.Brand}
-              </li>
-              <li className="flex justify-between  text-2xl">
-                <span className="font-bold"> {"pc Serialno:"}</span>
-                {item.Serialno}
-              </li>
-              <li className="flex justify-between  text-2xl">
-                <span className="font-bold">{"PC color:"}</span>
-                {item.color}
-              </li>
-            </ul>
-          ))
+        {data ? (
+          <ul className="bg-gray-200  rounded-2xl w-full shadow-xl p-10">
+            <li className="text-center font-mono font-bold text-2xl underline mb-3">
+              Information
+            </li>
+            <li className="flex justify-between  text-2xl">
+              <span className="font-bold"> {"Id number:"}</span>
+              {data.id}
+            </li>
+            <li className="flex justify-between  text-2xl">
+              <span className="font-bold"> {"Name:"}</span>
+              {data.name}
+            </li>
+            <li className="flex justify-between  text-2xl">
+              <span className="font-bold">{"department:"}</span>
+              {data.department}
+            </li>
+            <li className="flex justify-between  text-2xl">
+              <span className="font-bold">{"status:"}</span>
+              {data.status}
+            </li>
+            <li className="flex justify-between  text-2xl">
+              <span className="font-bold">{"Phone number:"}</span>
+              {data.phone}
+            </li>
+            <li className="flex justify-between  text-2xl">
+              <span className="font-bold"> {"Block:"}</span>
+              {data.block}
+            </li>
+            <li className="flex justify-between  text-2xl">
+              <span className="font-bold">{"Pc Brand:"}</span>
+              {data.Brand}
+            </li>
+            <li className="flex justify-between  text-2xl">
+              <span className="font-bold"> {"pc Serialno:"}</span>
+              {data.Serialno}
+            </li>
+            <li className="flex justify-between  text-2xl">
+              <span className="font-bold">{"PC color:"}</span>
+              {data.color}
+            </li>
+          </ul>
         ) : (
           <h1 className="flex mt-20 justify-center items-center h-full text-4xl font-bold">
             {" "}
