@@ -20,6 +20,16 @@
       "Brand": "Lenovo",
       "Serialno": "Rjsonus",
       "color": "black"
+    },
+    {
+      "id": "dbu1407689",
+      "name": "Metasebya alemnew",
+      "department": "computer enginering",
+      "phone": "25798543278",
+      "block": "15",
+      "Brand": "hp",
+      "Serialno": "n9065f7",
+      "color": "silver"
     }
   ]
 }
